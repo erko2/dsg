@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option java_package = "de.uniba.rz.io.rpc";
+option java_multiple_files = true;
+option java_outer_classname = "TicketManagement";
+
+option objc_class_prefix = "RTG";
+
+service TicketManagementService {
+    rpc createNewTicket(CreateTicketTransferObject) returns (TicketTransferObject);
+    rpc getAllTickets(TicketRequest) returns (stream TicketTransferObject);
+    rpc acceptTicket(TicketId) returns (TicketTransferObject);
+    rpc rejectTicket(TicketId) returns (TicketTransferObject);
+    rpc closeTicket(TicketId) returns (TicketTransferObject);
+    rpc StartAutoUpdating(stream AutoUpdateRequest) returns (stream TicketTransferObject);
+}
+
+message TicketRequest {
+}
+
+message AutoUpdateRequest {
+    enum RequestType {
+        REGISTER = 0;
+        DEREGISTER = 1;
+    }
+    RequestType requestType = 1;
+}
+
+message TicketId {
+    int32 id = 1;
+}
+
+message TicketTransferObject {
+    int32 id = 1;
+    string reporter = 2;
+    string topic = 3;
+    string description = 4;
+    Type type = 5;
+    Priority priority = 6;
+    Status status = 7;
+}
+
+message CreateTicketTransferObject {
+    string reporter = 1;
+    string topic = 2;
+    string description = 3;
+    Type type = 4;
+    Priority priority = 5;
+    Status status = 6;
+}
+
+enum Type {
+    TASK = 0;
+    ENHANCEMENT = 1;
+    BUG = 2;
+    QUESTION = 3;
+}
+
+enum Priority {
+    CRITICAL = 0;
+    MAJOR = 1;
+    MINOR =2;
+}
+
+enum Status {
+    NEW = 0;
+    ACCEPTED = 1;
+    REJECTED = 2;
+    CLOSED =3;
+}
