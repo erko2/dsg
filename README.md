@@ -44,9 +44,3 @@ If you are interested inspect the `idistrsys/build.gradle` to see all the releva
     "localhost 1337 TicketQueue UpdateQueue ListRequestQueue ticketUpdateFanout"
 # DSG Project- UDP - AMQP - REST - gRPC 
 
-git init
-git add .
-git commit -m "all working solutions - DSG Project- UDP - AMQP - REST - gRPC  "
-git branch -M master
-git remote add origin https://github.com/erko2/dsg.git
-git push -u origin master
